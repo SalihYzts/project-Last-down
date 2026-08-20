@@ -306,8 +306,29 @@ section{padding:clamp(70px,10vh,130px) var(--pad);position:relative}
   overflow:hidden;transition:background .35s;text-align:left;border:none;color:inherit;font:inherit;
 }
 .gal-card:hover{background:var(--ink-3)}
-.gal-card .art{position:absolute;inset:0;opacity:.6;transition:opacity .4s,transform .6s}
-.gal-card:hover .art{opacity:.85;transform:scale(1.03)}
+.gal-card .art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;transition:opacity .4s,transform .6s}
+.gal-card:hover .art{opacity:1;transform:scale(1.04)}
+.gal-card .zoom{position:absolute;top:14px;right:14px;width:24px;height:24px;color:var(--bone);z-index:2;opacity:0;transition:opacity .3s}
+.gal-card:hover .zoom{opacity:.9}
+
+/* ---- lightbox ---- */
+.lb{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:14px;padding:clamp(16px,4vw,54px);
+    background:color-mix(in srgb,var(--ink) 94%,transparent);backdrop-filter:blur(6px)}
+.lb[hidden]{display:none}
+.lb img{max-width:100%;max-height:80vh;object-fit:contain;border:1px solid var(--line)}
+.lb-cap{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+        color:var(--bone-dim);text-align:center;max-width:60ch}
+.lb-cap b{color:var(--accent);font-weight:600}
+.lb-close,.lb-nav{position:absolute;background:color-mix(in srgb,var(--ink) 70%,transparent);
+        border:1px solid var(--line);color:var(--bone);cursor:pointer;font-family:var(--f-mono);
+        font-size:13px;padding:10px 14px;line-height:1;
+        transition:border-color .25s,color .25s,background .25s}
+.lb-close:hover,.lb-nav:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.lb-close{top:clamp(14px,3vw,28px);right:clamp(14px,3vw,28px)}
+.lb-nav{top:50%;transform:translateY(-50%);font-size:20px;padding:12px 16px}
+.lb-nav.prev{left:clamp(8px,2vw,22px)}
+.lb-nav.next{right:clamp(8px,2vw,22px)}
 .gal-card .meta{position:relative;z-index:2}
 .gal-card .kind{font-family:var(--f-mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px}
 .gal-card .name{font-family:var(--f-display);font-weight:700;font-size:20px;text-transform:uppercase;line-height:1.02}
@@ -587,8 +608,8 @@ footer{padding:52px var(--pad) 40px;border-top:1px solid var(--line)}
 <!-- ================= TICKER ================= -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
-    <span>56 eşya <i>·</i> 100 elle yazılmış hayatta kalan hikâyesi <i>·</i> 30 zombi varyantı <i>·</i> 3 NPC sınıfı <i>·</i> 8 seviyeli gözcü kulesi <i>·</i> vergi · üretim · moral <i>·</i> enfeksiyon geri sayımı <i>·</i></span>
-    <span>56 eşya <i>·</i> 100 elle yazılmış hayatta kalan hikâyesi <i>·</i> 30 zombi varyantı <i>·</i> 3 NPC sınıfı <i>·</i> 8 seviyeli gözcü kulesi <i>·</i> vergi · üretim · moral <i>·</i> enfeksiyon geri sayımı <i>·</i></span>
+    <span>2.5B hayatta kalma <i>·</i> 56 eşya · 6 kategori <i>·</i> 100 elle yazılmış hikâye <i>·</i> 30 zombi varyantı <i>·</i> tabanca · AR · pompalı · beyzbol sopası · molotof <i>·</i> 3 NPC sınıfı <i>·</i> 8 seviyeli gözcü kulesi <i>·</i> vergi · üretim · moral <i>·</i> enfeksiyon geri sayımı <i>·</i> her 10. gece boss gecesi <i>·</i></span>
+    <span>2.5B hayatta kalma <i>·</i> 56 eşya · 6 kategori <i>·</i> 100 elle yazılmış hikâye <i>·</i> 30 zombi varyantı <i>·</i> tabanca · AR · pompalı · beyzbol sopası · molotof <i>·</i> 3 NPC sınıfı <i>·</i> 8 seviyeli gözcü kulesi <i>·</i> vergi · üretim · moral <i>·</i> enfeksiyon geri sayımı <i>·</i> her 10. gece boss gecesi <i>·</i></span>
   </div>
 </div>
 
@@ -598,7 +619,7 @@ footer{padding:52px var(--pad) 40px;border-top:1px solid var(--line)}
     <div class="sec-head rv">
       <span class="eyebrow">Konsept</span>
       <h2 class="sec-title">Bir kişi.<br>Bir yerleşke.<br>Sayılı geceler.</h2>
-      <p class="lede">Üçüncü şahıs, yatay eksende ilerleyen bir hayatta kalma ve üs kurma oyunu.
+      <p class="lede">Üçüncü şahıs, 2.5B — yatay eksende ilerleyen bir hayatta kalma ve üs kurma oyunu.
         Tek bir kişiyi yönetirsin; arkandaki topluluk büyüdükçe oyun bir yönetim simülasyonuna dönüşür.</p>
     </div>
 
@@ -739,7 +760,14 @@ footer{padding:52px var(--pad) 40px;border-top:1px solid var(--line)}
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M9 9v11M13 13h5M13 16h5"/></svg>
           <div>
             <h4>30 slot, 200 kg</h4>
-            <p>Sürükle-bırak envanter, altı kategori sekmesi, toplu transfer. Boşalttığın yağma kasası sahnede boş kalır.</p>
+            <p>Altı kategori: 6 silah, 5 mühimmat, 4 yiyecek/içecek, 5 tıbbi, 35 malzeme, 3 ekipman. Boşalttığın yağma kasası sahnede boş kalır.</p>
+          </div>
+        </article>
+        <article class="feat">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6c0 4-2 5-2 5h16s-2-1-2-5a6 6 0 0 0-6-6Z"/><path d="M10.5 21a2 2 0 0 0 3 0"/></svg>
+          <div>
+            <h4>Sürü alarmı</h4>
+            <p>Bir zombiyi vurduğunda çevredeki tüm zombiler aynı hedefe kilitlenir. Tek bir ateş sesi bütün grubu üstüne çekebilir — sessiz kalmak da bir strateji.</p>
           </div>
         </article>
       </div>
@@ -753,7 +781,7 @@ footer{padding:52px var(--pad) 40px;border-top:1px solid var(--line)}
     <div class="wrap sec-head rv" style="margin-bottom:0">
       <span class="eyebrow">Anlatı</span>
       <h2 class="sec-title">Kahraman yok</h2>
-      <p class="lede">Dünya, ana senaryo metniyle değil; eşya betimlemeleri ve NPC arka hikâyeleriyle kuruluyor. Yerleşkene katılan herkes kendi geçmişini birlikte getiriyor.</p>
+      <p class="lede">Dünya, ana senaryo metniyle değil; eşya betimlemeleri ve NPC arka hikâyeleriyle kuruluyor. Her hikâye 150–300 kelime: şoför, doktor, terzi, öğretmen, itfaiyeci. Yerleşkene katılan herkes kendi geçmişini birlikte getiriyor — ve o hikâye oyunu kapatıp açsan bile ona ait kalıyor.</p>
     </div>
   </div>
   <div class="quotes rv">
@@ -767,7 +795,11 @@ footer{padding:52px var(--pad) 40px;border-top:1px solid var(--line)}
     </div>
     <div class="q">
       <blockquote>"Artık iğneyi yara dikmek için kullanıyorum. İp aynı ip; dikişlerim artık kumaşta değil, tende."</blockquote>
-      <cite>Terzi — hayatta kalan #38</cite>
+      <cite>Terzi — hayatta kalan hikâyesi</cite>
+    </div>
+    <div class="q">
+      <blockquote>"Elimde stetoskop yerine artık bir tüfek var. Ama biri yaralandığında ilk koşan hâlâ benim; o kısmım hiç ölmedi."</blockquote>
+      <cite>Asistan doktor — hayatta kalan hikâyesi</cite>
     </div>
   </div>
 </section>
@@ -778,7 +810,7 @@ footer{padding:52px var(--pad) 40px;border-top:1px solid var(--line)}
     <div class="sec-head rv">
       <span class="eyebrow">Galeri · medya arşivi</span>
       <h2 class="sec-title">Oyundan<br>görüntüler</h2>
-      <p class="lede">Ekran görüntüleri, videolar ve konsept çalışmaları. Sekmelerden filtrele — arşiv her geliştirici günlüğünde büyüyor.</p>
+      <p class="lede">Motor içi ekran görüntüleri, tanıtım videosu ve arayüz çizimleri. Sekmelerden filtrele, büyütmek için tıkla.</p>
     </div>
 
     <div class="tabs rv" role="tablist" aria-label="Galeri filtresi">
@@ -805,81 +837,110 @@ footer{padding:52px var(--pad) 40px;border-top:1px solid var(--line)}
     </div>
 
     <div class="gal rv" id="gal">
-      <!-- VİDEOLAR -->
-      <div class="gal-item" data-t="video"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-3)"/><path d="M0 72h160v28H0Z" fill="var(--ink-2)"/><path d="M14 72V44h20v28ZM44 72V34h28v38ZM82 72V52h16v20ZM108 72V40h24v32Z" fill="var(--ink)"/><circle cx="132" cy="22" r="10" fill="var(--accent)" opacity=".28"/></svg>
+      <div class="gal-item" data-t="video"><button class="gal-card torn" id="galTrailer">
+        <img class="art" src="assets/trailer-poster.jpg" alt="First Down tanıtım videosundan bir kare" loading="lazy" width="1280" height="720">
         <div class="shade"></div>
         <svg class="play-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5Z" fill="currentColor" stroke="none"/></svg>
-        <div class="meta"><span class="kind">Oynanış</span><div class="name">Bir gün, beş dakika</div><div class="sub">Tam bir gün/gece döngüsü</div></div>
+        <div class="meta"><span class="kind">Fragman</span><div class="name">Tanıtım videosu</div><div class="sub">3:53 · oynanış görüntüleri</div></div>
       </button></div>
 
-      <div class="gal-item" data-t="video"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-3)"/><path d="M0 78h160v22H0Z" fill="var(--ink-2)"/><path d="M66 78V26l-8-5 8-5v-6l8-10 8 10v6l8 5-8 5v52Z" fill="var(--ink)"/><path d="M0 78V62h48v16M112 78V62h48v16" fill="var(--ink)"/></svg>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/vadi-kulube.jpg" data-cap="Vadi Kasabası">
+        <img class="art" src="assets/gal/vadi-kulube.jpg" alt="Ahşap kulübe ve çam ormanıyla çevrili kırsal yerleşim" loading="lazy" width="1000" height="625">
         <div class="shade"></div>
-        <svg class="play-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5Z" fill="currentColor" stroke="none"/></svg>
-        <div class="meta"><span class="kind">Sistem turu</span><div class="name">Üssü kurmak</div><div class="sub">Sur, kule, kışla, atölye</div></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Ortam</span><div class="name">Vadi Kasabası</div><div class="sub">Kulübe & çam ormanı</div></div>
       </button></div>
-
-      <div class="gal-item" data-t="video"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-3)"/><path d="M22 80V38a18 18 0 0 1 36 0v42Z" fill="var(--ink)"/><path d="M96 80V44a16 16 0 0 1 32 0v36Z" fill="var(--ink-2)"/><path d="M0 80h160v20H0Z" fill="var(--ink-2)"/></svg>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/vadi-teraslar.jpg" data-cap="Kayalık Teraslar">
+        <img class="art" src="assets/gal/vadi-teraslar.jpg" alt="Kayalık teraslar ve bitki örtüsüyle kaplı vadi yamacı" loading="lazy" width="1000" height="625">
         <div class="shade"></div>
-        <svg class="play-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5Z" fill="currentColor" stroke="none"/></svg>
-        <div class="meta"><span class="kind">Geliştirici günlüğü #1</span><div class="name">100 hikâye nasıl yazıldı</div><div class="sub">Anlatı ekibiyle</div></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Ortam</span><div class="name">Kayalık Teraslar</div><div class="sub">Vadi sırtları</div></div>
       </button></div>
-
-      <!-- EKRAN GÖRÜNTÜLERİ -->
-      <div class="gal-item" data-t="shot"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-3)"/><path d="M0 78h160v22H0Z" fill="var(--ink-2)"/><path d="M12 78V50h18v28ZM40 78V38h26v40ZM76 78V56h14v22ZM100 78V44h22v34ZM132 78V60h16v18Z" fill="var(--ink)"/><circle cx="126" cy="24" r="9" fill="var(--accent)" opacity=".3"/></svg>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/vadi-dagyolu.jpg" data-cap="Dağ Yolu">
+        <img class="art" src="assets/gal/vadi-dagyolu.jpg" alt="Vadiye inen dağ yolu ve ahşap yapı" loading="lazy" width="1000" height="625">
         <div class="shade"></div>
-        <div class="meta"><span class="kind">Ortam</span><div class="name">Vadi Kasabası</div><div class="sub">Ahşap kulübeler, çam ormanı</div></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Ortam</span><div class="name">Dağ Yolu</div><div class="sub">Vadiye inen rota</div></div>
       </button></div>
-
-      <div class="gal-item" data-t="shot"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-3)"/><path d="M0 70h160v30H0Z" fill="var(--ink-2)"/><path d="M20 70V30h40v40ZM70 70V46h30v24ZM110 70V36h34v34Z" fill="var(--ink)"/><path d="M20 30h40M110 36h34" stroke="var(--accent)" stroke-opacity=".35" stroke-width="2"/></svg>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/endustri-enkaz.jpg" data-cap="Enkaz Avlusu">
+        <img class="art" src="assets/gal/endustri-enkaz.jpg" alt="Palet ve moloz yığınlarıyla dolu fabrika avlusu" loading="lazy" width="1000" height="625">
         <div class="shade"></div>
-        <div class="meta"><span class="kind">Ortam</span><div class="name">Yıkık Fabrika</div><div class="sub">Enkaz avlusu, makine odası</div></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Ortam</span><div class="name">Enkaz Avlusu</div><div class="sub">Endüstriyel bölge</div></div>
       </button></div>
-
-      <div class="gal-item" data-t="shot"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-3)"/><path d="M0 74h160v26H0Z" fill="var(--ink-2)"/><path d="M14 74V44h132v30Z" fill="var(--ink)"/><path d="M30 74V56h14v18M60 74V56h14v18M90 74V56h14v18M120 74V56h14v18" fill="var(--ink-3)"/></svg>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/endustri-makine.jpg" data-cap="Paslı Makine Odası">
+        <img class="art" src="assets/gal/endustri-makine.jpg" alt="Paslı variller ve tuğla duvarlı makine odası" loading="lazy" width="1000" height="625">
         <div class="shade"></div>
-        <div class="meta"><span class="kind">Ortam</span><div class="name">Depo İç Mekân</div><div class="sub">Kasa yığınları, koridorlar</div></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Ortam</span><div class="name">Paslı Makine Odası</div><div class="sub">Fabrika içi</div></div>
       </button></div>
-
-      <div class="gal-item" data-t="shot"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-3)"/><path d="M0 80h160v20H0Z" fill="var(--ink-2)"/><path d="M66 80V26l-8-5 8-5v-6l8-10 8 10v6l8 5-8 5v54Z" fill="var(--ink)"/><path d="M0 80V64h50v16M110 80V64h50v16" fill="var(--ink)"/></svg>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/endustri-fabrika.jpg" data-cap="Fabrika Avlusu">
+        <img class="art" src="assets/gal/endustri-fabrika.jpg" alt="Bitki örtüsünün kapladığı terk edilmiş fabrika avlusu" loading="lazy" width="1000" height="625">
         <div class="shade"></div>
-        <div class="meta"><span class="kind">Üs</span><div class="name">Gözcü Kulesi</div><div class="sub">8 seviye, garnizon noktaları</div></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Ortam</span><div class="name">Fabrika Avlusu</div><div class="sub">Doğaya karışmış enkaz</div></div>
       </button></div>
-
-      <div class="gal-item" data-t="shot"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-3)"/><path d="M0 84h160v16H0Z" fill="var(--ink-2)"/><g fill="var(--ink)"><rect x="10" y="52" width="12" height="32"/><rect x="34" y="46" width="12" height="38"/><rect x="58" y="56" width="12" height="28"/><rect x="90" y="44" width="12" height="40"/><rect x="114" y="54" width="12" height="30"/><rect x="138" y="48" width="12" height="36"/></g><rect y="20" width="160" height="14" fill="var(--blood)" opacity=".45"/></svg>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/depo-ic.jpg" data-cap="Depo İç Mekân">
+        <img class="art" src="assets/gal/depo-ic.jpg" alt="Boru ve kafeslerle dolu karanlık antrepo iç mekânı" loading="lazy" width="1000" height="625">
         <div class="shade"></div>
-        <div class="meta"><span class="kind">Savaş</span><div class="name">Onuncu gece</div><div class="sub">Sürü ikiye katlandığında</div></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Ortam</span><div class="name">Depo İç Mekân</div><div class="sub">Antrepo koridorları</div></div>
       </button></div>
-
-      <!-- KONSEPT & ARAYÜZ -->
-      <div class="gal-item" data-t="art"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-2)"/><g stroke="var(--bone)" stroke-opacity=".5" fill="none" stroke-width="1.2"><rect x="18" y="30" width="42" height="40"/><path d="M18 30l21-14 21 14M28 70V52h10v18"/><rect x="76" y="34" width="30" height="36"/><path d="M76 34l15-12 15 12M91 70V54"/><rect x="120" y="38" width="24" height="32"/><path d="M120 38l12-10 12 10"/></g></svg>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/oynanis-npc.jpg" data-cap="NPC Diyaloğu">
+        <img class="art" src="assets/gal/oynanis-npc.jpg" alt="Tarlada iki hayatta kalanla diyalog sahnesi" loading="lazy" width="1000" height="625">
         <div class="shade"></div>
-        <div class="meta"><span class="kind">Arayüz</span><div class="name">Üs yönetimi ikonları</div><div class="sub">Elle çizilmiş çizgi-sanat</div></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Oynanış</span><div class="name">NPC Diyaloğu</div><div class="sub">Devriyeyle karşılaşma</div></div>
       </button></div>
-
-      <div class="gal-item" data-t="art"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-2)"/><g stroke="var(--bone)" stroke-opacity=".45" fill="none" stroke-width="1.2"><path d="M24 62c0-10 8-16 16-16s16 6 16 16-8 14-16 14-16-4-16-14Z"/><path d="M32 56h16M40 48v-6"/><rect x="74" y="44" width="34" height="24" rx="2"/><path d="M84 44v-6h14v6M91 50v12M85 56h12"/><path d="M126 70V44h14v26Z"/><path d="M126 50h14"/></g></svg>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/oynanis-catisma.jpg" data-cap="Sokak Çatışması">
+        <img class="art" src="assets/gal/oynanis-catisma.jpg" alt="Yıkık binalar arasında çatışma anı" loading="lazy" width="1000" height="625">
         <div class="shade"></div>
-        <div class="meta"><span class="kind">Arayüz</span><div class="name">Eşya ikonografisi</div><div class="sub">56 eşyanın çizim seti</div></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Oynanış</span><div class="name">Sokak Çatışması</div><div class="sub">Yıkık yapılar arası</div></div>
       </button></div>
-
-      <div class="gal-item" data-t="art"><button class="gal-card torn" onclick="soon(this)">
-        <svg class="art" viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="var(--ink-2)"/><g fill="none" stroke="var(--accent)" stroke-opacity=".5" stroke-width="1.2"><rect x="16" y="20" width="128" height="60"/><path d="M16 34h128M28 46h40M28 56h56M28 66h30"/><rect x="96" y="46" width="36" height="24"/></g></svg>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/oynanis-alacakaranlik.jpg" data-cap="Alacakaranlık">
+        <img class="art" src="assets/gal/oynanis-alacakaranlik.jpg" alt="Akşam karanlığında yaklaşan zombi" loading="lazy" width="1000" height="625">
         <div class="shade"></div>
-        <div class="meta"><span class="kind">Konsept</span><div class="name">HUD taslakları</div><div class="sub">Durum barları, silah seçici</div></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Oynanış</span><div class="name">Alacakaranlık</div><div class="sub">Sürü yaklaşıyor</div></div>
+      </button></div>
+      <div class="gal-item" data-t="shot"><button class="gal-card torn" data-full="assets/gal/oynanis-gece.jpg" data-cap="Gece">
+        <img class="art" src="assets/gal/oynanis-gece.jpg" alt="Ay ışığı ve sis altında gece manzarası" loading="lazy" width="1000" height="625">
+        <div class="shade"></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Oynanış</span><div class="name">Gece</div><div class="sub">Sis, ay ışığı, siluet</div></div>
+      </button></div>
+      <div class="gal-item" data-t="art"><button class="gal-card torn" data-full="assets/gal/arayuz-us-ikonlari.jpg" data-cap="Üs Yönetimi İkonları">
+        <img class="art" src="assets/gal/arayuz-us-ikonlari.jpg" alt="Asker binası, atölye, laboratuvar, pazar, tamirhane ikonları" loading="lazy" width="1000" height="625">
+        <div class="shade"></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Arayüz</span><div class="name">Üs Yönetimi İkonları</div><div class="sub">Elle çizilmiş bina seti</div></div>
+      </button></div>
+      <div class="gal-item" data-t="art"><button class="gal-card torn" data-full="assets/gal/arayuz-esya-ikonlari.jpg" data-cap="Eşya İkonografisi">
+        <img class="art" src="assets/gal/arayuz-esya-ikonlari.jpg" alt="Tabanca, tüfek, medical kit, gaz maskesi gibi eşya ikonları" loading="lazy" width="1000" height="625">
+        <div class="shade"></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Arayüz</span><div class="name">Eşya İkonografisi</div><div class="sub">12 eşya çizimi</div></div>
+      </button></div>
+      <div class="gal-item" data-t="art"><button class="gal-card torn" data-full="assets/gal/arayuz-gostergeler.jpg" data-cap="Durum Göstergeleri">
+        <img class="art" src="assets/gal/arayuz-gostergeler.jpg" alt="Mutluluk, nüfus, vergi oranı gösterge ikonları" loading="lazy" width="1000" height="625">
+        <div class="shade"></div>
+        <svg class="zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M11 8v6M8 11h6"/></svg>
+        <div class="meta"><span class="kind">Arayüz</span><div class="name">Durum Göstergeleri</div><div class="sub">Moral, vergi, nüfus</div></div>
       </button></div>
     </div>
 
   </div>
 </section>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Görsel önizleme">
+  <button class="lb-close" id="lbClose" aria-label="Kapat">ESC ✕</button>
+  <button class="lb-nav prev" id="lbPrev" aria-label="Önceki görsel">‹</button>
+  <button class="lb-nav next" id="lbNext" aria-label="Sonraki görsel">›</button>
+  <img id="lbImg" alt="">
+  <p class="lb-cap" id="lbCap"></p>
+</div>
 
 <!-- ================= GELECEK ================= -->
 <section id="gelecek" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
@@ -974,10 +1035,10 @@ footer{padding:52px var(--pad) 40px;border-top:1px solid var(--line)}
       <div class="stats rv">
         <div class="stat"><div class="v">100</div><span class="k">elle yazılmış hayatta kalan hikâyesi</span></div>
         <div class="stat"><div class="v">56</div><span class="k">tanımlı eşya · 6 kategori</span></div>
-        <div class="stat"><div class="v">30</div><span class="k">zombi görünüm varyantı</span></div>
+        <div class="stat"><div class="v">30</div><span class="k">zombi görünümü · 2 tip × 3 × 5</span></div>
         <div class="stat"><div class="v">%100</div><span class="k">Türkçe yazılmış içerik</span></div>
-        <div class="stat"><div class="v">16</div><span class="k">bölümlük tasarım belgesi</span></div>
-        <div class="stat"><div class="v">5dk</div><span class="k">süren bir oyun günü</span></div>
+        <div class="stat"><div class="v">16</div><span class="k">bölüm + tam eşya tablosu</span></div>
+        <div class="stat"><div class="v">5dk</div><span class="k">süren oyun günü · ayarlanabilir</span></div>
       </div>
     </div>
 
@@ -1180,6 +1241,7 @@ footer{padding:52px var(--pad) 40px;border-top:1px solid var(--line)}
           <li><b>Kingdom: Two Crowns</b><span>sessiz inşa arayüzü</span></li>
           <li><b>State of Decay</b><span>nüfus ve moral yönetimi</span></li>
           <li><b>Project Zomboid</b><span>hayatta kalma baskısı</span></li>
+          <li><b>7 Days to Die</b><span>gece baskını ve üs savunması</span></li>
         </ul>
       </div>
     </div>
@@ -1278,6 +1340,46 @@ document.querySelectorAll(".rv").forEach(el=>io.observe(el));
     if(p&&p.catch) p.catch(function(){});
   });
   vid.addEventListener("ended",function(){ box.classList.remove("playing"); });
+})();
+
+/* ---- galeri lightbox ---- */
+(function(){
+  var lb=document.getElementById("lb"), img=document.getElementById("lbImg"),
+      cap=document.getElementById("lbCap"), list=[], idx=0;
+  function refresh(){ list=[].slice.call(document.querySelectorAll("#gal .gal-item:not([hidden]) .gal-card[data-full]")); }
+  function show(i){
+    refresh(); if(!list.length) return;
+    idx=(i+list.length)%list.length;
+    var c=list[idx];
+    img.src=c.dataset.full; img.alt=c.querySelector("img").alt;
+    cap.innerHTML="<b>"+c.dataset.cap+"</b> · "+(idx+1)+" / "+list.length;
+    lb.hidden=false; document.body.style.overflow="hidden";
+  }
+  function close(){ lb.hidden=true; img.removeAttribute("src"); document.body.style.overflow=""; }
+  document.getElementById("gal").addEventListener("click",function(e){
+    var c=e.target.closest(".gal-card[data-full]"); if(!c) return;
+    refresh(); show(list.indexOf(c));
+  });
+  document.getElementById("lbClose").addEventListener("click",close);
+  document.getElementById("lbPrev").addEventListener("click",function(){show(idx-1);});
+  document.getElementById("lbNext").addEventListener("click",function(){show(idx+1);});
+  lb.addEventListener("click",function(e){ if(e.target===lb) close(); });
+  document.addEventListener("keydown",function(e){
+    if(lb.hidden) return;
+    if(e.key==="Escape") close();
+    else if(e.key==="ArrowLeft") show(idx-1);
+    else if(e.key==="ArrowRight") show(idx+1);
+  });
+})();
+
+/* ---- galerideki fragman kartı ana oynatıcıya götürür ---- */
+(function(){
+  var t=document.getElementById("galTrailer"); if(!t) return;
+  t.addEventListener("click",function(){
+    var box=document.getElementById("fragman"), btn=document.getElementById("fragmanBtn");
+    box.scrollIntoView({behavior:"smooth",block:"center"});
+    setTimeout(function(){ if(btn && !box.classList.contains("playing")) btn.click(); },520);
+  });
 })();
 
 /* ---- galeri filtresi ---- */
