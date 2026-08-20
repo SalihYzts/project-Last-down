@@ -1,13 +1,13 @@
-# Last Down — Tanıtım Sitesi
+# Last Dawn — Tanıtım Sitesi
 
-*Last Down*; kıyamet sonrası bir dünyada tek bir hayatta kalanı yönettiğin,
+*Last Dawn*; kıyamet sonrası bir dünyada tek bir hayatta kalanı yönettiğin,
 hayatta kalma ile üs kurmayı birleştiren PC oyununun tanıtım sayfası.
 
 ## Yapı
 
 ```
 index.html                    Tüm site (tek dosya: HTML + CSS + JS, bağımlılık yok)
-assets/last-down-720p.mp4    Tanıtım videosu · 720p · 3:53 · 42 MB
+assets/last-dawn-720p.mp4    Tanıtım videosu · 720p · 3:53 · 42 MB
 assets/trailer-poster.jpg     Video poster karesi
 assets/gal/                   Galeri görselleri (14 adet, 1000x625)
                               · 7 motor içi ekran görüntüsü (tasarım belgesi Böl. 14)
