@@ -1,13 +1,13 @@
-# First Down — Tanıtım Sitesi
+# Last Down — Tanıtım Sitesi
 
-*First Down*; kıyamet sonrası bir dünyada tek bir hayatta kalanı yönettiğin,
+*Last Down*; kıyamet sonrası bir dünyada tek bir hayatta kalanı yönettiğin,
 hayatta kalma ile üs kurmayı birleştiren PC oyununun tanıtım sayfası.
 
 ## Yapı
 
 ```
 index.html                    Tüm site (tek dosya: HTML + CSS + JS, bağımlılık yok)
-assets/first-dawn-720p.mp4    Tanıtım videosu · 720p · 3:53 · 42 MB
+assets/last-down-720p.mp4    Tanıtım videosu · 720p · 3:53 · 42 MB
 assets/trailer-poster.jpg     Video poster karesi
 assets/gal/                   Galeri görselleri (14 adet, 1000x625)
                               · 7 motor içi ekran görüntüsü (tasarım belgesi Böl. 14)
