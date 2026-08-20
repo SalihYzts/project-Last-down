@@ -1,0 +1,19 @@
+# İşletim sistemi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editör
+.vscode/
+.idea/
+*.swp
+*~
+
+# Geçici
+*.log
+*.tmp
+node_modules/
+
+# Video ham kaynağı (siteye 720p sürümü giriyor)
+*_source.mp4
+First_Dawn.mp4
